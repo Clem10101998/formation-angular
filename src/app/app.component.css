@@ -1,4 +1,8 @@
-/* Allow to show invalid input */
-input.ng-invalid.ng-touched{
-    border: 1px solid red;
+
+.odd{
+    color:red;
+}
+
+.even{
+    color: green;
 }
