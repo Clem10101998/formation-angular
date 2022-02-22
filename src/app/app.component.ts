@@ -1,35 +1,50 @@
-import { Component, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormArray, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-
-  //Properties for two way Binding
-  answer = '';
-  defaultQuestion = 'pet';
-  @ViewChild('f') signupForm: NgForm | undefined; //Accès au formulaire
-  title = 'formation-angular';
-
+export class AppComponent implements OnInit{
+  
   genders = ['female', 'male'];
+  signupForm!: FormGroup;
 
-  submitted = false;
+  //Définition du formulaire et des validators
+  ngOnInit(): void {
+    this.signupForm = new FormGroup({
+      'username': new FormControl(null, Validators.required),
+      //Multiple Validators
+      'email': new FormControl(null, [Validators.required, Validators.email]),
+      'gender': new FormControl('female'),
+    });
 
-  user = {
-    username: '',
-    email: '',
-    secretQuestion: '',
-    answer: '',
-    gender: ''
-  };
+    //Permet d'indiquer si le formulaire est valide
+    this.signupForm.statusChanges.subscribe(
+      (status) => console.log(status)
+    );
 
-  onSubmit(form: NgForm){
-    this.submitted = true;
-    console.log(this.signupForm);//Vérification de la soumission du formulaire avec NgForm
-    //Reset form after submission
-    this.signupForm?.reset();
+    //Set the value of each input
+    this.signupForm.setValue({
+      'username': 'Max',
+      'email': 'max@gmail.com',
+      'gender':'male'
+    });
   }
+
+  //Submitting form
+  onSubmit(){
+    console.log(this.signupForm.value);
+    //Reset input after submitting
+    this.signupForm.reset();
+  }
+
+  //Validator for username
+  showErrorsforUsername(){
+    const username = this.signupForm.controls.username;
+    return username.hasError('required');
+  }
+
+
 }

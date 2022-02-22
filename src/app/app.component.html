@@ -1,49 +1,24 @@
 <h1 style="text-align: center;">Template-Driven Forms</h1>
 <div class="container">
-  <!-- f est une réfrence permettant d'accéder au formulaire -->
-  <form class="row g-3" (ngSubmit)="onSubmit(f)" #f="ngForm">
-
-
+  <!-- Définition du formulaire à utiliser et de la méthode de soumission -->
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
     <div class="col-12">
-      <!-- ngModel : allow to get control of the form -->
+      <!-- Définition de l'input du formulaire avec formControlName -->
       <label for="username" class="form-label">Username</label>
-      <input type="text" class="form-control" id="username" placeholder="Jacques" [(ngModel)]="user.username" name="username" required>
+      <input type="text" class="form-control" id="username" placeholder="jacques" formControlName="username">
+      <span *ngIf="showErrorsforUsername()" style="color: red;">Username required</span>
     </div>
     <div class="col-12">
       <label for="email" class="form-label">Email</label>
-      <input type="email" class="form-control" id="email" placeholder="jacques@gmail.com" [(ngModel)]="user.email" name="email">
+      <input type="email" class="form-control" id="email" placeholder="jacques@gmail.com" formControlName="email">
     </div>
-    <div class="col-12">
-      <label for="secret">Secret Questions</label>
-      <select id="secret" class="form-select" [(ngModel)]="user.secretQuestion" name="secret"> 
-        <option value="get">Your first Pet ?</option>
-        <option value="teacher">Your first teacher</option>
-      </select>
-    </div> 
-    <div class="col-12">
-      <textarea name="questionAnswer" rows="3" [(ngModel)]="user.answer"></textarea>
-    </div>
-    <p>Your reply : {{answer}}</p>
-
-    <!-- Gestion des Radio Button -->
     <div class="col-12" *ngFor="let gender of genders">
-      <label>
-        <input type="radio" name="gender" [(ngModel)]="user.gender" [value]="gender"> {{gender}}
-      </label>
+      <label><input type="radio" [value]="gender" formControlName="gender"><span style="margin-left: 10px;">{{gender}}</span></label>
     </div>
-    <div class="col-12"> 
-      <!-- Vérification de l'ensemble des champs avec les validators -->
-      <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Submit</button>
-    </div>
+  
+    <button class="btn btn-success" type="submit" [disabled]="!signupForm.valid">Submit</button>
+    
   </form>
-  <div *ngIf="submitted">
-    <h3>Your Data</h3>
-    <p>{{user.username}} </p>
-    <p>{{user.email}} </p>
-    <p>{{user.secretQuestion}} </p>
-    <p>{{user.answer}} </p>
-    <p>{{user.gender}} </p>
-
-  </div>
+  
 </div>
 
