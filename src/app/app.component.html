@@ -1,24 +1,30 @@
-<h1 style="text-align: center;">Template-Driven Forms</h1>
+<h1 style="text-align: center;">Solutions Polynome</h1>
 <div class="container">
-  <!-- Définition du formulaire à utiliser et de la méthode de soumission -->
-  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-    <div class="col-12">
-      <!-- Définition de l'input du formulaire avec formControlName -->
-      <label for="username" class="form-label">Username</label>
-      <input type="text" class="form-control" id="username" placeholder="jacques" formControlName="username">
-      <span *ngIf="showErrorsforUsername()" style="color: red;">Username required</span>
-    </div>
-    <div class="col-12">
-      <label for="email" class="form-label">Email</label>
-      <input type="email" class="form-control" id="email" placeholder="jacques@gmail.com" formControlName="email">
-    </div>
-    <div class="col-12" *ngFor="let gender of genders">
-      <label><input type="radio" [value]="gender" formControlName="gender"><span style="margin-left: 10px;">{{gender}}</span></label>
-    </div>
-  
-    <button class="btn btn-success" type="submit" [disabled]="!signupForm.valid">Submit</button>
-    
+
+  <form >
+
   </form>
+  
+<h3>Saisie des constantes : </h3>
+
+  <div class="row">
+    <input id="a" class="col" type="text" placeholder="a" [(ngModel)]="a" style="border: 1px solid red;">
+    <input class="col" type="text" placeholder="b" [(ngModel)]="b" style="border: 1px solid red;">
+    <input class="col" type="text" placeholder="c"[(ngModel)]="c"  style="border: 1px solid red;">
+  </div>
+  <div style="background-color: orange; margin: 20px 600px 20px 0px; border-radius: 5px; padding: 10px; text-align: center;">
+    <h3>Polynôme saisi : (<span style="color: red;">{{a}}</span>)x² + 
+      (<span style="color: red;">{{b}}</span>)x + 
+      (<span style="color: red;">{{c}}</span>))</h3>
+    <h4 style="margin-top: 20px;">Delta : {{delta}}</h4>
+    <h4 *ngIf="delta === 0">Solution : X0 = {{x1}}</h4>
+    <h4 *ngIf="delta > 0">Solutions : X1 = {{x1}} et X2 = {{x2}}</h4>
+  </div>
+
+  <h1 style="color: orange; margin-bottom: 20px;" *ngIf="delta < 0">La résolution avec les nombres complexes arrivent prochainement.</h1>
+  
+  <button class="btn btn-primary" (click)="getSolution()">Obtenir les solutions</button>
+  <button class="btn btn-success" style="margin-left: 20px;">Cliquez pour voir la résolution</button>
   
 </div>
 
