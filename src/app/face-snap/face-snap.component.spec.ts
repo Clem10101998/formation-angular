@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PolynomesComponent } from './polynomes.component';
+import { FaceSnapComponent } from './face-snap.component';
 
-describe('PolynomesComponent', () => {
-  let component: PolynomesComponent;
-  let fixture: ComponentFixture<PolynomesComponent>;
+describe('FaceSnapComponent', () => {
+  let component: FaceSnapComponent;
+  let fixture: ComponentFixture<FaceSnapComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PolynomesComponent ]
+      declarations: [ FaceSnapComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PolynomesComponent);
+    fixture = TestBed.createComponent(FaceSnapComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
