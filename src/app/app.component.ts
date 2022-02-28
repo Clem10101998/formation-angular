@@ -11,14 +11,27 @@ export class AppComponent implements OnInit{
 
   mySnap!: FaceSnap;
 
+  otherSnap!: FaceSnap;
+
   ngOnInit(): void {
-    this.mySnap = new FaceSnap(
-      "hello", 
-      "Best friend", 
-      "https://cdn.pixabay.com/photo/2015/05/31/16/03/teddy-bear-792273_1280.jpg",
-      new Date(),
-      0
-    );
+    
+    this.mySnap = {
+      title: "hello", 
+      description: "Best friend", 
+      imageUrl: "https://cdn.pixabay.com/photo/2015/05/31/16/03/teddy-bear-792273_1280.jpg",
+      createdDate: new Date(),
+      snaps: 0
+    };
+
+    this.otherSnap = {
+      title: "hello other", 
+      description: "Best friend other", 
+      imageUrl: "https://cdn.pixabay.com/photo/2015/05/31/16/03/teddy-bear-792273_1280.jpg",
+      createdDate: new Date(),
+      snaps: 0,
+      location: "Bretagne"
+    }
+
   }
 }
 
